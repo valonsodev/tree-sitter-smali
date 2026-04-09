@@ -1,0 +1,45 @@
+========================================================================
+Test Unicode identifiers in class, field, and method names
+========================================================================
+
+.class public Lcom/example/O〇Oooo〇〇;
+.super Ljava/lang/Object;
+.source ""
+
+.field O〇Oooo〇〇:Ljava/lang/String;
+
+.method public O〇Oooo〇〇()V
+    return-void
+.end method
+
+---
+
+(class_definition
+  (class_directive
+    (access_modifiers
+      (access_modifier))
+    (class_identifier
+      (identifier)
+      (identifier)
+      (identifier)))
+  (super_directive
+    (class_identifier
+      (identifier)
+      (identifier)
+      (identifier)))
+  (source_directive
+    (string))
+  (field_definition
+    (field_identifier)
+    (field_type
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier))))
+  (method_definition
+    (access_modifier)
+    (method_signature
+      (method_identifier)
+      (primitive_type))
+    (expression
+      (opcode))))

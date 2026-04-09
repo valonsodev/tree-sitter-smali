@@ -1,0 +1,38 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "smali",
+      "camelcase": "Smali",
+      "title": "Smali",
+      "scope": "source.smali",
+      "file-types": [
+        "smali"
+      ],
+      "injection-regex": "^smali$",
+      "class-name": "TreeSitterSmali"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.1",
+    "license": "MIT",
+    "description": "Smali grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "valonsodev"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/valonsodev/tree-sitter-smali.git"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
