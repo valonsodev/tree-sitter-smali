@@ -45,3 +45,71 @@ Test Unicode identifiers in class, field, and method names
       (expression
         (opcode))))
 )
+
+
+
+========================================================================
+Test Unicode letter-number identifiers
+========================================================================
+
+.class public Lcom/example/Holder;
+.super Ljava/lang/Object;
+.source ""
+
+.field public static Ⅽ:Ljava/lang/String;
+
+.method private declared-synchronized Ⅽ()V
+    sget-object v0, Lcom/example/Holder;->Ⅽ:Ljava/lang/String;
+    return-void
+.end method
+
+---
+
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (field_definition
+      (access_modifier)
+      (access_modifier)
+      (field_identifier)
+      (field_type
+        (class_identifier
+          (identifier)
+          (identifier)
+          (identifier))))
+    (method_definition
+      (access_modifier)
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (expression
+        (opcode)
+        (variable)
+        (body
+          (class_identifier
+            (identifier)
+            (identifier)
+            (identifier))
+          (field_identifier)
+          (field_type
+            (class_identifier
+              (identifier)
+              (identifier)
+              (identifier)))))
+      (expression
+        (opcode))))
+)

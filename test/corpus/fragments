@@ -39,8 +39,7 @@ Test class member fragments
 (source_file
   (class_member_fragment
     (field_definition
-      (access_modifiers
-        (access_modifier))
+      (access_modifier)
       (field_identifier)
       (field_type
         (primitive_type))

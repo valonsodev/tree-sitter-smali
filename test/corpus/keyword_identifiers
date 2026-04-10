@@ -1,12 +1,12 @@
 ========================================================================
-Test a field without an access modifier
+Test a field name that matches a modifier keyword
 ========================================================================
 
 .class public LA/BC;
 .super Ljava/lang/Object;
 .source ""
 
-.field a:Ljava/lang/String;
+.field private final bridge:Ljava/lang/Object;
 
 ---
 
@@ -26,31 +26,27 @@ Test a field without an access modifier
     (source_directive
       (string))
     (field_definition
+      (access_modifier)
+      (access_modifier)
       (field_identifier)
       (field_type
         (class_identifier
           (identifier)
           (identifier)
-          (identifier)))))
-)
-
+          (identifier))))))
 
 
 ========================================================================
-Test special field literals and annotation primitive values
+Test a method name that matches a modifier keyword
 ========================================================================
 
 .class public LA/BC;
 .super Ljava/lang/Object;
 .source ""
 
-.field private static final METHOD_SEPARATOR:C = '#'
-.field public static final NEGATIVE_INFINITY:F = -Infinityf
-
-.annotation runtime Lcom/example/Anno;
-    factory = V
-    declClass = [B
-.end annotation
+.method private static final synchronized()V
+    return-void
+.end method
 
 ---
 
@@ -69,34 +65,51 @@ Test special field literals and annotation primitive values
         (identifier)))
     (source_directive
       (string))
-    (field_definition
+    (method_definition
       (access_modifier)
       (access_modifier)
       (access_modifier)
-      (field_identifier)
-      (field_type
+      (method_signature
+        (method_identifier)
         (primitive_type))
-      (character))
-    (field_definition
-      (access_modifier)
-      (access_modifier)
-      (access_modifier)
-      (field_identifier)
-      (field_type
-        (primitive_type))
-      (Infinity))
-    (annotation_directive
-      (annotation_visibility)
+      (expression
+        (opcode)))))
+
+
+========================================================================
+Test a real synchronized modifier still parses as a modifier
+========================================================================
+
+.class public LA/BC;
+.super Ljava/lang/Object;
+.source ""
+
+.method public synchronized foo()V
+    return-void
+.end method
+
+---
+
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
       (class_identifier
         (identifier)
         (identifier)
-        (identifier))
-      (annotation_property
-        (annotation_key)
-        (annotation_value
-          (primitive_type)))
-      (annotation_property
-        (annotation_key)
-        (annotation_value
-          (array_type
-            (primitive_type)))))))
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
+      (access_modifier)
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (expression
+        (opcode)))))

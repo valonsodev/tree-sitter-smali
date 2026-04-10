@@ -34,7 +34,7 @@
   (field_type) @local.definition.associated)
 
 ((field_definition
-  (access_modifiers) @_mod
+  (access_modifier) @_mod
   (field_identifier) @local.definition.constant)
   (#match? @_mod "enum"))
 

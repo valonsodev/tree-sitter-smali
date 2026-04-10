@@ -294,10 +294,6 @@
           "named": true
         },
         {
-          "type": "class_identifier",
-          "named": true
-        },
-        {
           "type": "enum_reference",
           "named": true
         },
@@ -311,6 +307,10 @@
         },
         {
           "type": "subannotation_directive",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -660,7 +660,7 @@
       "required": true,
       "types": [
         {
-          "type": "access_modifiers",
+          "type": "access_modifier",
           "named": true
         },
         {
@@ -1500,6 +1500,10 @@
     "named": false
   },
   {
+    "type": "array-data",
+    "named": false
+  },
+  {
     "type": "array-length",
     "named": false
   },
@@ -1594,10 +1598,6 @@
   },
   {
     "type": "const/high16",
-    "named": false
-  },
-  {
-    "type": "constructor",
     "named": false
   },
   {
@@ -1813,11 +1813,23 @@
     "named": false
   },
   {
+    "type": "iget-boolean-quick",
+    "named": false
+  },
+  {
     "type": "iget-byte",
     "named": false
   },
   {
+    "type": "iget-byte-quick",
+    "named": false
+  },
+  {
     "type": "iget-char",
+    "named": false
+  },
+  {
+    "type": "iget-char-quick",
     "named": false
   },
   {
@@ -1841,6 +1853,10 @@
     "named": false
   },
   {
+    "type": "iget-short-quick",
+    "named": false
+  },
+  {
     "type": "iget-volatile",
     "named": false
   },
@@ -1857,15 +1873,7 @@
     "named": false
   },
   {
-    "type": "instance-get",
-    "named": false
-  },
-  {
     "type": "instance-of",
-    "named": false
-  },
-  {
-    "type": "instance-put",
     "named": false
   },
   {
@@ -1897,10 +1905,6 @@
     "named": false
   },
   {
-    "type": "invoke-constructor",
-    "named": false
-  },
-  {
     "type": "invoke-custom",
     "named": false
   },
@@ -1918,10 +1922,6 @@
   },
   {
     "type": "invoke-direct/range",
-    "named": false
-  },
-  {
-    "type": "invoke-instance",
     "named": false
   },
   {
@@ -2245,6 +2245,10 @@
     "named": false
   },
   {
+    "type": "packed-switch-payload",
+    "named": false
+  },
+  {
     "type": "param_identifier",
     "named": true
   },
@@ -2318,6 +2322,14 @@
   },
   {
     "type": "return-void",
+    "named": false
+  },
+  {
+    "type": "return-void-barrier",
+    "named": false
+  },
+  {
+    "type": "return-void-no-barrier",
     "named": false
   },
   {
@@ -2421,6 +2433,10 @@
     "named": false
   },
   {
+    "type": "sparse-switch-payload",
+    "named": false
+  },
+  {
     "type": "sput",
     "named": false
   },
@@ -2465,14 +2481,6 @@
     "named": false
   },
   {
-    "type": "static-get",
-    "named": false
-  },
-  {
-    "type": "static-put",
-    "named": false
-  },
-  {
     "type": "strictfp",
     "named": false
   },
@@ -2502,14 +2510,6 @@
   },
   {
     "type": "sub-int/2addr",
-    "named": false
-  },
-  {
-    "type": "sub-int/lit16",
-    "named": false
-  },
-  {
-    "type": "sub-int/lit8",
     "named": false
   },
   {

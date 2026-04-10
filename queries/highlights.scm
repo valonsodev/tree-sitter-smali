@@ -62,7 +62,8 @@
 ((method_identifier) @constructor
   (#any-of? @constructor "<init>" "<clinit>"))
 
-"constructor" @constructor
+((access_modifier) @constructor
+  (#eq? @constructor "constructor"))
 
 ; Fields
 ; ======

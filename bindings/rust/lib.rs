@@ -5,9 +5,11 @@
 //!
 //! ```
 //! let code = r#"
+//! .class public Lexample/Test;
+//! .super Ljava/lang/Object;
 //! "#;
 //! let mut parser = tree_sitter::Parser::new();
-//! let language = tree_sitter_smali::LANGUAGE;
+//! let language = tree_sitter_smali_valonsodev::LANGUAGE;
 //! parser
 //!     .set_language(&language.into())
 //!     .expect("Error loading Smali parser");

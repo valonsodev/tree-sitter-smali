@@ -179,7 +179,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "access_modifiers"
+              "name": "_field_access_modifiers"
             },
             {
               "type": "BLANK"
@@ -364,7 +364,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "class_identifier"
+          "name": "type"
         }
       ]
     },
@@ -410,60 +410,66 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
+                "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
+                    "type": "CHOICE",
                     "members": [
                       {
-                        "type": "REPEAT",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "annotation_directive"
-                        }
+                        "type": "STRING",
+                        "value": ","
                       },
                       {
-                        "type": "STRING",
-                        "value": ".end param"
+                        "type": "BLANK"
                       }
                     ]
                   },
                   {
-                    "type": "SEQ",
+                    "type": "CHOICE",
                     "members": [
                       {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": ","
-                          },
-                          {
-                            "type": "BLANK"
-                          }
-                        ]
+                        "type": "SYMBOL",
+                        "name": "literal"
                       },
                       {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "literal"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "identifier"
-                            },
-                            "named": true,
-                            "value": "param_identifier"
-                          }
-                        ]
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        },
+                        "named": true,
+                        "value": "param_identifier"
                       }
                     ]
                   }
                 ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "annotation_directive"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ".end param"
               },
               {
                 "type": "BLANK"
@@ -1074,10 +1080,6 @@
         },
         {
           "type": "STRING",
-          "value": "invoke-constructor"
-        },
-        {
-          "type": "STRING",
           "value": "invoke-custom"
         },
         {
@@ -1087,10 +1089,6 @@
         {
           "type": "STRING",
           "value": "invoke-direct-empty"
-        },
-        {
-          "type": "STRING",
-          "value": "invoke-instance"
         },
         {
           "type": "STRING",
@@ -1111,6 +1109,10 @@
         {
           "type": "STRING",
           "value": "invoke-virtual"
+        },
+        {
+          "type": "STRING",
+          "value": "return-void-no-barrier"
         },
         {
           "type": "STRING",
@@ -1490,10 +1492,6 @@
         },
         {
           "type": "STRING",
-          "value": "sub-int/lit16"
-        },
-        {
-          "type": "STRING",
           "value": "mul-int/lit16"
         },
         {
@@ -1519,10 +1517,6 @@
         {
           "type": "STRING",
           "value": "add-int/lit8"
-        },
-        {
-          "type": "STRING",
-          "value": "sub-int/lit8"
         },
         {
           "type": "STRING",
@@ -1562,27 +1556,15 @@
         },
         {
           "type": "STRING",
-          "value": "static-get"
-        },
-        {
-          "type": "STRING",
-          "value": "static-put"
-        },
-        {
-          "type": "STRING",
-          "value": "instance-get"
-        },
-        {
-          "type": "STRING",
-          "value": "instance-put"
-        },
-        {
-          "type": "STRING",
           "value": "execute-inline"
         },
         {
           "type": "STRING",
           "value": "execute-inline/range"
+        },
+        {
+          "type": "STRING",
+          "value": "return-void-barrier"
         },
         {
           "type": "STRING",
@@ -1595,6 +1577,22 @@
         {
           "type": "STRING",
           "value": "iget-object-quick"
+        },
+        {
+          "type": "STRING",
+          "value": "iget-boolean-quick"
+        },
+        {
+          "type": "STRING",
+          "value": "iget-char-quick"
+        },
+        {
+          "type": "STRING",
+          "value": "iget-short-quick"
+        },
+        {
+          "type": "STRING",
+          "value": "iget-byte-quick"
         },
         {
           "type": "STRING",
@@ -1639,6 +1637,18 @@
         {
           "type": "STRING",
           "value": "invoke-super-quick/range"
+        },
+        {
+          "type": "STRING",
+          "value": "packed-switch-payload"
+        },
+        {
+          "type": "STRING",
+          "value": "sparse-switch-payload"
+        },
+        {
+          "type": "STRING",
+          "value": "array-data"
         },
         {
           "type": "STRING",
@@ -2165,7 +2175,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "<?[\\p{L}_$][\\p{L}\\p{N}_\\-$]*>?"
+      "value": "<?[\\p{L}\\p{Nl}_$][\\p{L}\\p{Nl}\\p{N}_\\-$]*>?"
     },
     "class_identifier": {
       "type": "SEQ",
@@ -2680,20 +2690,28 @@
         "name": "access_modifier"
       }
     },
+    "_field_access_modifiers": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "ALIAS",
+        "content": {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        "named": true,
+        "value": "access_modifier"
+      }
+    },
     "_method_access_modifiers": {
       "type": "REPEAT1",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "access_modifier"
-          },
-          {
-            "type": "STRING",
-            "value": "constructor"
-          }
-        ]
+        "type": "ALIAS",
+        "content": {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        "named": true,
+        "value": "access_modifier"
       }
     },
     "access_modifier": {
@@ -3266,7 +3284,15 @@
             },
             {
               "type": "STRING",
+              "value": "Infinityf"
+            },
+            {
+              "type": "STRING",
               "value": "-Infinity"
+            },
+            {
+              "type": "STRING",
+              "value": "-Infinityf"
             }
           ]
         }
@@ -3436,17 +3462,21 @@
     "comment": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "#"
-          },
-          {
-            "type": "PATTERN",
-            "value": ".*"
-          }
-        ]
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "#"
+            },
+            {
+              "type": "PATTERN",
+              "value": ".*"
+            }
+          ]
+        }
       }
     }
   },

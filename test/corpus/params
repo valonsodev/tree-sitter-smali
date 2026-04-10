@@ -125,3 +125,103 @@ Test a param block with an empty annotation
             (identifier)
             (identifier))))))
 )
+
+
+
+========================================================================
+Test a named param block with an empty annotation and no end param
+========================================================================
+
+.class public LA/BC;
+.super Ljava/lang/Object;
+.source ""
+
+.method public simple()V
+	.param p1, "arg0"
+    .annotation build Landroidx/annotation/RecentlyNonNull;
+    .end annotation
+.end method
+
+---
+
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (param_directive
+        (parameter)
+        (string
+          (string_fragment))
+        (annotation_directive
+          (annotation_visibility)
+          (class_identifier
+            (identifier)
+            (identifier)
+            (identifier)))))))
+
+
+
+========================================================================
+Test a named param block with an empty annotation
+========================================================================
+
+.class public LA/BC;
+.super Ljava/lang/Object;
+.source ""
+
+.method public simple()V
+	.param p1, "arg0"
+    .annotation build Landroidx/annotation/RecentlyNonNull;
+    .end annotation
+  .end param
+.end method
+
+---
+
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (param_directive
+        (parameter)
+        (string
+          (string_fragment))
+        (annotation_directive
+          (annotation_visibility)
+          (class_identifier
+            (identifier)
+            (identifier)
+            (identifier))))))
+)

@@ -168,16 +168,15 @@ const opcodes = [
   'sput-volatile',
   'sput-wide-volatile',
   'sput-object-volatile',
-  'invoke-constructor',
   'invoke-custom',
   'invoke-direct',
   'invoke-direct-empty',
-  'invoke-instance',
   'invoke-interface',
   'invoke-polymorphic',
   'invoke-static',
   'invoke-super',
   'invoke-virtual',
+  'return-void-no-barrier',
   'invoke-custom/range',
   'invoke-direct/range',
   'invoke-interface/range',
@@ -272,7 +271,6 @@ const opcodes = [
   'div-double/2addr',
   'rem-double/2addr',
   'add-int/lit16',
-  'sub-int/lit16',
   'mul-int/lit16',
   'div-int/lit16',
   'rem-int/lit16',
@@ -280,7 +278,6 @@ const opcodes = [
   'or-int/lit16',
   'xor-int/lit16',
   'add-int/lit8',
-  'sub-int/lit8',
   'mul-int/lit8',
   'div-int/lit8',
   'rem-int/lit8',
@@ -290,15 +287,16 @@ const opcodes = [
   'shl-int/lit8',
   'shr-int/lit8',
   'ushr-int/lit8',
-  'static-get',
-  'static-put',
-  'instance-get',
-  'instance-put',
   'execute-inline',
   'execute-inline/range',
+  'return-void-barrier',
   'iget-quick',
   'iget-wide-quick',
   'iget-object-quick',
+  'iget-boolean-quick',
+  'iget-char-quick',
+  'iget-short-quick',
+  'iget-byte-quick',
   'iput-quick',
   'iput-wide-quick',
   'iput-object-quick',
@@ -310,6 +308,9 @@ const opcodes = [
   'invoke-virtual-quick/range',
   'invoke-super-quick',
   'invoke-super-quick/range',
+  'packed-switch-payload',
+  'sparse-switch-payload',
+  'array-data',
   'rsub-int',
   'rsub-int/lit8',
 ];
@@ -392,7 +393,7 @@ module.exports = grammar({
 
     field_definition: $ => seq(
       '.field',
-      optional($.access_modifiers),
+      optional($._field_access_modifiers),
       $._field_body,
       optional(seq('=', $.value)),
       optional(seq(
@@ -427,7 +428,7 @@ module.exports = grammar({
       $.list,
       $.enum_reference,
       $.subannotation_directive,
-      $.class_identifier,
+      $.type,
     ),
 
     subannotation_directive: $ => seq(
@@ -440,10 +441,9 @@ module.exports = grammar({
     param_directive: $ => prec.right(seq(
       '.param',
       $.parameter,
-      optional(choice(
-        seq(repeat($.annotation_directive), '.end param'),
-        seq(optional(','), choice($.literal, alias($.identifier, $.param_identifier))),
-      )),
+      optional(seq(optional(','), choice($.literal, alias($.identifier, $.param_identifier)))),
+      optional(repeat1($.annotation_directive)),
+      optional('.end param'),
     )),
 
     parameter_directive: $ => prec.right(seq(
@@ -555,7 +555,7 @@ module.exports = grammar({
     prologue_directive: _ => '.prologue',
     epilogue_directive: _ => '.epilogue',
 
-    identifier: _ => new RustRegex('<?[\\p{L}_$][\\p{L}\\p{N}_\\-$]*>?'),
+    identifier: _ => new RustRegex('<?[\\p{L}\\p{Nl}_$][\\p{L}\\p{Nl}\\p{N}_\\-$]*>?'),
     class_identifier: $ => seq(
       alias($.L, 'L'),
       alias($._class_ident, $.identifier),
@@ -637,7 +637,9 @@ module.exports = grammar({
 
     access_modifiers: $ => repeat1($.access_modifier),
 
-    _method_access_modifiers: $ => repeat1(choice($.access_modifier, 'constructor')),
+    _field_access_modifiers: $ => repeat1(alias($.identifier, $.access_modifier)),
+
+    _method_access_modifiers: $ => repeat1(alias($.identifier, $.access_modifier)),
 
     access_modifier: _ => choice(...access_flags.concat(restriction_flags)),
 
@@ -715,7 +717,7 @@ module.exports = grammar({
     // so this approach was used instead
     NaN: _ => token(prec(1, choice('NaN', 'NaNf'))),
 
-    Infinity: _ => token(prec(1, choice('Infinity', '-Infinity'))),
+    Infinity: _ => token(prec(1, choice('Infinity', 'Infinityf', '-Infinity', '-Infinityf'))),
 
     // string: _ => /"[^"\\]*(?:\\.[^"\\]*)*"/,
     string: $ => seq(
@@ -760,6 +762,6 @@ module.exports = grammar({
 
     null: _ => 'null',
 
-    comment: _ => token(seq('#', /.*/)),
+    comment: _ => token(prec(-1, seq('#', /.*/))),
   },
 });
