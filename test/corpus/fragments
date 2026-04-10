@@ -1,0 +1,80 @@
+========================================================================
+Test a method body fragment
+========================================================================
+
+.locals 2
+const/4 v0, 0x1
+return v0
+
+---
+
+(source_file
+  (method_body_fragment
+    (locals_directive
+      (number))
+    (expression
+      (opcode)
+      (variable)
+      (number))
+    (expression
+      (opcode)
+      (variable))))
+
+
+
+========================================================================
+Test class member fragments
+========================================================================
+
+.field public answer:I = 0x2a
+
+.method public getAnswer()I
+  .locals 1
+  const/16 v0, 0x2a
+  return v0
+.end method
+
+---
+
+(source_file
+  (class_member_fragment
+    (field_definition
+      (access_modifiers
+        (access_modifier))
+      (field_identifier)
+      (field_type
+        (primitive_type))
+      (number))
+    (method_definition
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (locals_directive
+        (number))
+      (expression
+        (opcode)
+        (variable)
+        (number))
+      (expression
+        (opcode)
+        (variable)))))
+
+
+
+========================================================================
+Test an annotation fragment prefers class members
+========================================================================
+
+.annotation runtime Lfoo/Bar;
+.end annotation
+
+---
+
+(source_file
+  (class_member_fragment
+    (annotation_directive
+      (annotation_visibility)
+      (class_identifier
+        (identifier)
+        (identifier)))))

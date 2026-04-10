@@ -8,22 +8,24 @@ Test an empty interface
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
-      (access_modifier)
-      (access_modifier)
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string)))
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier)
+        (access_modifier)
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string)))
+)
 
 
 
@@ -39,26 +41,28 @@ Test an empty interface that extends another interface
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
-      (access_modifier)
-      (access_modifier)
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string))
-  (implements_directive
-    (class_identifier
-      (identifier)
-      (identifier))))
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier)
+        (access_modifier)
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (implements_directive
+      (class_identifier
+        (identifier)
+        (identifier))))
+)
 
 
 
@@ -75,28 +79,30 @@ Test an interface with one method
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier)
+        (access_modifier)
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
       (access_modifier)
       (access_modifier)
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string))
-  (method_definition
-    (access_modifier)
-    (access_modifier)
-    (method_signature
-      (method_identifier)
-      (primitive_type))))
+      (method_signature
+        (method_identifier)
+        (primitive_type))))
+)
 
 
 
@@ -113,32 +119,34 @@ Test an interface with one method with parameters and return value
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
-      (access_modifier)
-      (access_modifier)
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string))
-  (method_definition
-    (access_modifier)
-    (access_modifier)
-    (method_signature
-      (method_identifier)
-      (parameters
-        (class_identifier
-          (identifier)
-          (identifier))
-        (primitive_type))
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier)
+        (access_modifier)
+        (access_modifier))
       (class_identifier
         (identifier)
-        (identifier)))))
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
+      (access_modifier)
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (parameters
+          (class_identifier
+            (identifier)
+            (identifier))
+          (primitive_type))
+        (class_identifier
+          (identifier)
+          (identifier)))))
+)

@@ -12,29 +12,31 @@ Test an empty statement
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier)
+        (access_modifier)
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
       (access_modifier)
-      (access_modifier)
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string))
-  (method_definition
-    (access_modifier)
-    (method_signature
-      (method_identifier)
-      (primitive_type))
-    (expression
-      (opcode))))
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (expression
+        (opcode))))
+)
 
 
 
@@ -53,38 +55,40 @@ Test statements with variable and number literal arguments
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier)
+        (access_modifier)
+        (access_modifier))
+      (class_identifier
+        (identifier)
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (method_definition
       (access_modifier)
       (access_modifier)
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string))
-  (method_definition
-    (access_modifier)
-    (access_modifier)
-    (method_signature
-      (method_identifier)
-      (parameters
-        (array_type
-          (class_identifier
-            (identifier)
-            (identifier)
-            (identifier))))
-      (primitive_type))
-    (expression
-      (opcode)
-      (variable)
-      (number))
-    (expression
-      (opcode)
-      (variable))))
+      (method_signature
+        (method_identifier)
+        (parameters
+          (array_type
+            (class_identifier
+              (identifier)
+              (identifier)
+              (identifier))))
+        (primitive_type))
+      (expression
+        (opcode)
+        (variable)
+        (number))
+      (expression
+        (opcode)
+        (variable))))
+)

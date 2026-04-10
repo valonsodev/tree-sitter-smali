@@ -14,32 +14,34 @@ Test Unicode identifiers in class, field, and method names
 
 ---
 
-(class_definition
-  (class_directive
-    (access_modifiers
-      (access_modifier))
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (super_directive
-    (class_identifier
-      (identifier)
-      (identifier)
-      (identifier)))
-  (source_directive
-    (string))
-  (field_definition
-    (field_identifier)
-    (field_type
+(source_file
+  (class_definition
+    (class_directive
+      (access_modifiers
+        (access_modifier))
       (class_identifier
         (identifier)
         (identifier)
-        (identifier))))
-  (method_definition
-    (access_modifier)
-    (method_signature
-      (method_identifier)
-      (primitive_type))
-    (expression
-      (opcode))))
+        (identifier)))
+    (super_directive
+      (class_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
+    (source_directive
+      (string))
+    (field_definition
+      (field_identifier)
+      (field_type
+        (class_identifier
+          (identifier)
+          (identifier)
+          (identifier))))
+    (method_definition
+      (access_modifier)
+      (method_signature
+        (method_identifier)
+        (primitive_type))
+      (expression
+        (opcode))))
+)

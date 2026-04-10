@@ -328,6 +328,7 @@ module.exports = grammar({
 
   conflicts: $ => [
     [$.field_definition], // smali/src/test/resources/LexerTest/RealSmaliFileTest.smali to understand why
+    [$.class_member_fragment, $.statement],
   ],
 
   externals: $ => [
@@ -353,6 +354,12 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   rules: {
+    source_file: $ => choice(
+      $.class_definition,
+      prec(1, $.class_member_fragment),
+      $.method_body_fragment,
+    ),
+
     class_definition: $ => seq(
       $.class_directive,
       $.super_directive,
@@ -364,6 +371,14 @@ module.exports = grammar({
         $.field_definition,
       )),
     ),
+
+    class_member_fragment: $ => repeat1(choice(
+      $.annotation_directive,
+      $.method_definition,
+      $.field_definition,
+    )),
+
+    method_body_fragment: $ => repeat1($.statement),
 
     // class related
     class_directive: $ => seq(

@@ -3,6 +3,27 @@
   "name": "smali",
   "word": "identifier",
   "rules": {
+    "source_file": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "class_definition"
+        },
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "class_member_fragment"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "method_body_fragment"
+        }
+      ]
+    },
     "class_definition": {
       "type": "SEQ",
       "members": [
@@ -54,6 +75,33 @@
           }
         }
       ]
+    },
+    "class_member_fragment": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "annotation_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "method_definition"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "field_definition"
+          }
+        ]
+      }
+    },
+    "method_body_fragment": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "statement"
+      }
     },
     "class_directive": {
       "type": "SEQ",
@@ -3415,6 +3463,10 @@
   "conflicts": [
     [
       "field_definition"
+    ],
+    [
+      "class_member_fragment",
+      "statement"
     ]
   ],
   "precedences": [],
